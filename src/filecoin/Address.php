@@ -10,7 +10,7 @@ trait  Address
 {
     public  function newAddress()
     {
-        $data = Util::createDate("Filecoin.WalletNew", ["bls"]);
-        return Util::post($this::$nodeUrl, $data, [],$this->getAuth());
+        $data = Util::createDate("Filecoin.WalletBalance", ["f01234"]);
+        return Util::post($this::$nodeUrl, $data, [], $this::$projectId, $this::$projectKey);
     }
 }

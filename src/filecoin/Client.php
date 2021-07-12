@@ -17,8 +17,9 @@ class Client
 
     private function __construct()
     {
-    }
 
+    }
+    
     public static function Conn($url, $projectId, $projectKey)
     {
         $client = new self();

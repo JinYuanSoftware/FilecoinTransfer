@@ -2,31 +2,26 @@
 
 namespace src\filecoin;
 
+
 class Util
 {
-    public static function post($url, $data = [], $header = [], $auth)
+    public static function post($url, $data = [], $header = [], $projectId, $projectKey)
     {
-        $data_string = json_encode($data);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        $data = json_encode($data);
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
-        $add_header = [
-            'Content-Type: application/json',
-            $auth
-        ];
-        curl_setopt(
-            $ch,
-            CURLOPT_HTTPHEADER,
-            array_merge($header, $add_header)
-        );
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Content-Length:' . strlen($data), 'Authorization: Basic ' . base64_encode($projectId . ':' . $projectKey)]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);
-        var_dump(curl_getinfo($ch,CURLINFO_HTTP_CODE));
         curl_close($ch);
-        var_dump($result);die;
-        return json_decode($result, 1);
+        return json_decode($result,1);
     }
+
     public static function createDate($method, $params)
     {
         return [
