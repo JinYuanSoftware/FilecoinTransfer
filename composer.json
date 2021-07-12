@@ -1,0 +1,20 @@
+{
+    "name": "jinyuan/coin_transfer",
+    "description": "filecoin transfer",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "weizheng",
+            "email": "jsonwei@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "src\\filecoin\\": "src/filecoin",
+            "src\\demo\\": "src/demo"
+        }
+    }
+}
