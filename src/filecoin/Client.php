@@ -10,28 +10,19 @@ namespace src\filecoin;
 class Client
 {
     use Address;
-
+    use Wallet;
     private static $nodeUrl;
-    private static $projectId;
-    private static $projectKey;
 
     private function __construct()
     {
 
     }
     
-    public static function Conn($url, $projectId, $projectKey)
+    public static function Conn($url,$token)
     {
         $client = new self();
-        $client::$nodeUrl = $url;
-        $client::$projectId = $projectId;
-        $client::$projectKey = $projectKey;
+        $client::$nodeUrl = $url.'?token='.$token;
         return $client;
-    }
-
-    public function getAuth()
-    {
-        return "Authorization: Basic " . base64_encode(self::$projectId . ':' . self::$projectKey);
     }
 
     public function SetPrivateKey($privateKey)

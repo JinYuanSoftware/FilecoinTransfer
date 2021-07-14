@@ -5,14 +5,14 @@ namespace src\filecoin;
 
 class Util
 {
-    public static function post($url, $data = [], $header = [], $projectId, $projectKey)
+    public static function post($url, $data = [], $header = [])
     {
         $ch = curl_init();
         $data = json_encode($data);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Content-Length:' . strlen($data), 'Authorization: Basic ' . base64_encode($projectId . ':' . $projectKey)]);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Content-Length:' . strlen($data)]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
