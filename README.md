@@ -1,5 +1,5 @@
 # FilecoinTransfer
-php filecoin 类库
+php filecoin Api类库
 
 NewAddress 创建地址
 exportAddress 导出私钥
